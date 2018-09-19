@@ -7,6 +7,7 @@ import { ExpensesComponent } from './expenses/expenses.component';
 import { HttpClientModule }    from '@angular/common/http';
 import { DataService } from './data.service';
 import { AddExpenseComponent } from './add-expense/add-expense.component';
+import { PaysheetComponent } from './paysheet/paysheet.component';
 
 
 const routes: Route[]= [
@@ -23,6 +24,11 @@ const routes: Route[]= [
     path:'expenses',
     component: ExpensesComponent
 
+  },
+  {
+    path:'paySheet',
+    component: PaysheetComponent
+
   }
 
 ];
@@ -32,7 +38,8 @@ const routes: Route[]= [
   declarations: [
     AppComponent,
     ExpensesComponent,
-    AddExpenseComponent
+    AddExpenseComponent,
+    PaysheetComponent
   ],
   imports: [
     BrowserModule,

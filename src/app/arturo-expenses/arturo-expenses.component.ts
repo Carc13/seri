@@ -2,17 +2,18 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import {DataService} from '../data.service';
 @Component({
-  selector: 'app-paysheet',
-  templateUrl: './paysheet.component.html',
-  styleUrls: ['./paysheet.component.css']
+  selector: 'app-arturo-expenses',
+  templateUrl: './arturo-expenses.component.html',
+  styleUrls: ['./arturo-expenses.component.css']
 })
-export class PaysheetComponent implements OnInit {
+export class ArturoExpensesComponent implements OnInit {
 
-  employees=[];
+
+  expenses=[];
   alert : Boolean;
   num=[];
 
-   paysheet:{
+   arturoExpense:{
      PaysheetID:string,
      Employee: string,
      Payment : string,
@@ -20,7 +21,7 @@ export class PaysheetComponent implements OnInit {
    };
 
    show : Boolean = true;
-
+                                              /*******ME QUE DE AQUI, CONVIRTIENDO ESTA PARA QUE ENCAJE CON ARTURO CLASE******* */
 
   constructor(private dataService:DataService) { 
     this.alert = false;

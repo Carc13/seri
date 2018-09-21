@@ -13,6 +13,7 @@ import {DataService} from '../data.service';
 
 export class AddExpenseComponent implements OnInit {
  gastos=[];
+ Price: string;
  num=[];
   expense:{
     ExpenseID:string,
@@ -24,21 +25,26 @@ export class AddExpenseComponent implements OnInit {
   };
   Materials: String[];
   show : Boolean = true;
-
+  alert : Boolean;
 //https://stackoverflow.com/questions/43710137/angular-2-how-to-populate-a-dropdown-based-on-another-dropdown-selection
 //https://stackoverflow.com/questions/36150107/angular-2-change-event-model-changes
 
 
-  objectos: String;
+
   constructor(private dataService:DataService ) {
 
     this.addListMaterial("---SELECT---");
-
+    this.alert = false;
    };
 
   ngOnInit() {
   };
   
+  isNumber(event){
+
+    console.log(event);
+
+  }
 
 
   addListMaterial(algo){
@@ -117,8 +123,11 @@ export class AddExpenseComponent implements OnInit {
    }
   }
  
+  
 
-  createExpense(SubType,Materiales,price,otherMaterial){
+
+
+  createExpense(SubType,Materiales,otherMaterial){
    
 
     this.dataService.getData().subscribe(Data => {
@@ -145,7 +154,7 @@ export class AddExpenseComponent implements OnInit {
           Type: "Materiales Gastables",
           SubType : SubType.value,
           Object : Materiales.value,
-          Price : price.value,
+          Price : this.Price,
           Date : date.toString()
         };
        }
@@ -155,7 +164,7 @@ export class AddExpenseComponent implements OnInit {
         Type: "Materiales Gastables",
         SubType : SubType.value,
         Object : otherMaterial.value,
-        Price : price.value,
+        Price : this.Price,
         Date : date.toString()
       };
       }
@@ -164,13 +173,13 @@ export class AddExpenseComponent implements OnInit {
          SubType.value = "---SELECT---";
          this.addListMaterial(SubType.value);
          otherMaterial.value="";
-         price.value = "";
+        this.Price = "";
 
       });
       
      
     
-
+      this.alert = true;
     });
 
  
@@ -190,7 +199,11 @@ export class AddExpenseComponent implements OnInit {
     return Math.max.apply(null, numArray);
   }
 
+  dismiss(){
 
+    this.alert = false;
+
+  }
 
 }
 

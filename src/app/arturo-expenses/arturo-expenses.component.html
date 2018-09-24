@@ -9,29 +9,53 @@
         
         <br>
         <br>
-        <h2>Agregar nuevo gasto de nomina</h2>   
+        <h2>Agregar nuevo gasto de Arturo</h2>   
         <br>
         <div class="row">
-          <div col class="margin"><h4 for="sel1">Empleado:</h4></div>
+          <div col class="margin"><h4 for="sel1">Gasto:</h4></div>
           <div col>
               <div class="form-group">
-                  <select class="form-control" #employee>
+                  <select class="form-control" #type>
                     <option>---SELECT---</option>
-                    <option>Baniker</option>
-                    <option>Jasier</option>
-                    <option></option>
+                    <option>Desayuno</option>
+                    <option>Comida</option>
+                    <option>Merienda</option>
+                    <option>Cena</option>
+                    <option>Cafeteria</option>
+                    <option>Gym</option>
+                    <option>Ofrenda</option>
+                    <option>Diezmo</option>
+                    <option>Recargas</option>
+                    <option>Vestimenta</option>
+                    <option>Tarjeta de credito</option>
+                    <option>Regalos</option>
+                    <option>Cuidado personal</option>
+                    <option>Super mercado</option>
+                    <option>Transporte</option>
+                    <option>Antojo</option>
+                    <option>Otros</option>
+                  
                   </select>
                 </div> 
             
           </div>
         </div>
+        <div class="row">
+          <div col class="margin"><h4>Otros:  </h4></div>
+        <div col>
+            <div class="form-group">
+                <input type="text"  #othertype> 
+              </div> 
+        </div>
+      </div>
+
 
       
         <div class="row">
-          <div col class="margin"><h4>Cantidad:  </h4></div>
+          <div col class="margin"><h4>Precio:  </h4></div>
         <div col>
             <div class="form-group">
-                <input type="number"  #employeeSalary> 
+                <input type="number"  #price> 
               </div> 
         </div>
       </div>
@@ -39,7 +63,7 @@
 
         <div class="row">
             <div col class="margin"> 
-              <button type="button" class="btn btn-outline-primary" (click)="createPaysheet(employeeSalary,employee)" >
+              <button type="button" class="btn btn-outline-primary" (click)="createArturoExpense(type,othertype,price)" >
                      Agregar
               </button>
             </div> 
@@ -48,7 +72,7 @@
         <br>
         <br>
         <div class="alert alert-success alert-dismissible fade show" role="alert" *ngIf="alert">
-          <strong>Mensaje del sistema:</strong> Se agregado una nueva nomida de empleado!
+          <strong>Mensaje del sistema:</strong> Se agregado un nuevo gasto de Arturo!
           <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="dismiss()"> 
             <span aria-hidden="true">&times;</span>
           </button>

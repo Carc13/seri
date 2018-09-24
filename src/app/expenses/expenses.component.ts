@@ -11,9 +11,11 @@ import {Expense} from '../Expense';
 export class ExpensesComponent implements OnInit {
   paysheets = [];
   gastos =[];
+  arturoexpenses = [];
   total : number = 0;
   alert : Boolean;
   alertPaysheet: Boolean;
+  alertArturoExpense: Boolean;
   constructor(private dataService:DataService ) { 
     this.dataService.getData().subscribe(Data => {
       this.gastos = Data;
@@ -27,9 +29,13 @@ export class ExpensesComponent implements OnInit {
       this.paysheets = Data;
     
     });
+    this.dataService.getArturoExpenses().subscribe(Data => {
+      this.arturoexpenses = Data;
+    
+    });
     this.alertPaysheet = false; 
     this.alert = false;
-
+    this.alertArturoExpense = false;
     
 
 
@@ -75,6 +81,24 @@ export class ExpensesComponent implements OnInit {
   }
 
 
+  deleteArturoExpense(arturoexpense){
+
+    let response = confirm('¿Estas seguro que quieres eliminar esta nomina: "' + arturoexpense.Expense + " " + arturoexpense.Price+ " "+ arturoexpense.Date+'"?' );
+    if(response){
+    this.dataService.deleteArturoExpense(arturoexpense).subscribe(Data =>{});
+
+      for(let i=0;i < this.arturoexpenses.length;i++){
+          if(arturoexpense ==this.arturoexpenses[i]){
+            this.arturoexpenses.splice(i,1);
+          }
+      }
+    }
+    this.alertArturoExpense = true;
+
+  }
+
+
+
 
   ngOnInit() {
   }
@@ -82,6 +106,7 @@ export class ExpensesComponent implements OnInit {
   dismiss(){
     this.alert = false;
     this.alertPaysheet = false;  
+    this.alertArturoExpense = false;
   }
 
 

@@ -12,19 +12,18 @@ export class ArturoExpensesComponent implements OnInit {
   expenses=[];
   alert : Boolean;
   num=[];
-
    arturoExpense:{
-     PaysheetID:string,
-     Employee: string,
-     Payment : string,
-     Date : string
+    ArturoExpenseID: String,
+	  Expense: String,
+	  Price: String,
+	  Date: String
    };
 
    show : Boolean = true;
-                                              /*******ME QUE DE AQUI, CONVIRTIENDO ESTA PARA QUE ENCAJE CON ARTURO CLASE******* */
-
+                  
   constructor(private dataService:DataService) { 
     this.alert = false;
+
   }
 
   ngOnInit() {
@@ -32,16 +31,16 @@ export class ArturoExpensesComponent implements OnInit {
 
 
 
-  createPaysheet(employeeSalary,employee){
+  createArturoExpense(type,othertype,price){
    
-    this.dataService.getPaysheets().subscribe(Data => {
-      this.employees = Data;
+    this.dataService.getArturoExpenses().subscribe(Data => {
+      this.expenses = Data;
     
       let date = new Date();
       let mayor: number;
     
-      for(let i =0;i< this.employees.length;i++){
-        this.num.push(parseInt( this.employees[i].PaysheetID));
+      for(let i =0;i< this.expenses.length;i++){
+        this.num.push(parseInt( this.expenses[i].ArturoExpenseID));
        
       }
 
@@ -51,18 +50,40 @@ export class ArturoExpensesComponent implements OnInit {
       mayor = this.getMaxOfArray(this.num);
       } 
       
-        this.paysheet = {
-          PaysheetID:(mayor + 1).toString(),
-          Employee: employee.value,
-          Payment : employeeSalary.value,
+
+      if(othertype.value != ""){
+        this.arturoExpense = {
+          ArturoExpenseID:(mayor + 1).toString(),
+          Expense: othertype.value,
+          Price : price.value,
           Date : date.toString()
         };
        
-      this.dataService.addPaysheet(this.paysheet).subscribe(Data =>{
-         employee.value = "---SELECT---";
-         employeeSalary.value="";
+      this.dataService.addArturoExpense(this.arturoExpense).subscribe(Data =>{
+        type.value = "---SELECT---";
+        price.value="";
+        othertype.value="";
          this.alert = true;
       });
+
+
+      }
+
+      else{
+        this.arturoExpense = {
+          ArturoExpenseID:(mayor + 1).toString(),
+          Expense: type.value,
+          Price : price.value,
+          Date : date.toString()
+        };
+       
+      this.dataService.addArturoExpense(this.arturoExpense).subscribe(Data =>{
+        type.value = "---SELECT---";
+        price.value="";
+        othertype.value="";
+         this.alert = true;
+      });
+    }
 
     });
 
